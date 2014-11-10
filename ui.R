@@ -14,9 +14,19 @@ shinyUI(pageWithSidebar(
                     value = 3, min = 1, max = 10)
     ),
     mainPanel(
-        withMathJax("\\(\\require{color}\\)"),
-        withMathJax(h3("Plot of \\(\\textcolor{blue}{f(x)}\\) and its \\(n\\)th degree
-            Taylor polynomial \\(\\textcolor{red}{T_{n}(x)}\\)")),
+        withMathJax(helpText(
+             "Taylor polynomials are polynomials that best 
+            approximate a function near a point. (This app uses polynomials 
+            centered at zero.)")),
+        withMathJax(helpText(
+            "Choose a function \\(f(x)\\). Play with the value of \\(n\\) to
+            increase or decrease the power of the polynomial.
+            Some features of the approximation are easier to see if you change 
+            the range on the \\(x\\)-axis.")),
+        withMathJax(helpText(
+            "(If you don't see the plot right away, especially the first time 
+            you load the app, just be patient. There are several Javascript 
+            libraries that have to load.)")),
         uiOutput("input_f"),
         uiOutput("text"),
         plotOutput("plot")
