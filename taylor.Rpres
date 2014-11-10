@@ -1,0 +1,66 @@
+Taylor polynomials
+========================================================
+author: Sean Raleigh
+date: 11/09/2014
+
+```{r, echo=FALSE, message=FALSE}
+library(shiny)
+library(shinyapps)
+library(pracma) ## To calculate Taylor polynomial for graphing
+library(rSymPy) ## To print Taylor polynomials symbolically
+library(stringr) ## String maniuplation
+```
+
+Taylor polynomials
+========================================================
+
+Taylor polynomials are polynomials that best approximate a function near a point.
+
+Taylor polynomials
+========================================================
+
+For example, suppose that we want to approximate the function $f(x) = \sin{(x)}$ near the point $x = 0$ with a straight line. A first-semester calculus class tells us the answer is just the line $T_{1}(x) = x$.
+
+```{r, echo=FALSE}
+p_coef <- suppressWarnings(taylor(sin, 0, 1))
+x <- seq(-5, 5, length.out=1000)
+y <- sin(x)
+# Get Taylor polynomial as a function
+yp <- polyval(p_coef, x)
+```
+
+```{r, echo=FALSE, fig.width=20}
+# Plot f(x)
+plot(x, y, xlim = c(-5, 5), ylim = c(-2,2), type = "l", col = "blue")
+# Plot Taylor polynomial
+lines(x, yp, col = "red")
+```
+
+Taylor polynomials
+========================================================
+
+However, a cubic polynomial fits even better.
+
+$$T_{3}(x) = x - \frac{1}{6} x^{3}$$
+
+```{r, echo=FALSE}
+p_coef <- suppressWarnings(taylor(sin, 0, 3))
+x <- seq(-5, 5, length.out=1000)
+y <- sin(x)
+# Get Taylor polynomial as a function
+yp <- polyval(p_coef, x)
+```
+
+```{r, echo=FALSE, fig.width=20}
+# Plot f(x)
+plot(x, y, xlim = c(-5, 5), ylim = c(-2,2), type = "l", col = "blue")
+# Plot Taylor polynomial
+lines(x, yp, col = "red")
+```
+
+Taylor polynomials
+========================================================
+
+My Shiny app allows one to see how Taylor polynomials of various powers approximate a few common functions like $\sin{(x)}$, $\cos{(x)}$, and $e^{x}$.
+
+The app is a little bulky to embed here, so follow this [link](http://vectorposse.shinyapps.io/devdataprod-007_project) to see the app in action!
